@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة جميع دروس اللغة الإنجليزية للثانية بكالوريا - English With Simo</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading" class="loading-container">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">جاري التحميل...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="title-container">
+                    <img src="graduation cap.png" alt="Graduation Cap" class="title-image" onerror="this.style.display='none';">
+                    <h1 class="main-title">منصة جميع دروس اللغة الإنجليزية للثانية بكالوريا</h1>
+                </div>
+                <p class="slogan">دليلك الشامل للتفوق في الإمتحانات الوطنية</p>
+                <p class="subtitle">By English With Simo</p>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="البحث في الدروس..." class="search-input">
+                <button id="searchBtn" class="search-btn">🔍</button>
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Units View -->
+            <div id="unitsView" class="units-view">
+                <h2 class="section-title">اختر الوحدة</h2>
+                <div id="unitsGrid" class="units-grid">
+                    <!-- Units will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Promotional Banner -->
+            <div class="promotional-banner">
+                <div class="banner-content">
+                    <div class="banner-header">
+                        <div class="banner-icon">📢</div>
+                        <h3 class="banner-title">إنطلاق التسجيل في دروس اللغة الإنجليزية للثانية بكالوريا 🎓🇬🇧</h3>
+                    </div>
+                    
+                    <div class="banner-benefits">
+                        <h4 class="benefits-title">✨ ماذا تستفيد من هذا العرض؟</h4>
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <span class="benefit-number">1️⃣</span>
+                                <span class="benefit-text">🎥 حصص مباشرة مرتين في الأسبوع في مجموعة مغلقة على الفايسبوك</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-number">2️⃣</span>
+                                <span class="benefit-text">📝 تمارين تطبيقية خاصة بكل درس + نماذج من إمتحانات وطنية سابقة</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-number">3️⃣</span>
+                                <span class="benefit-text">📚 وثائق و ملخصات لجميع الدروس</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-number">4️⃣</span>
+                                <span class="benefit-text">⏳🔥 حصص مكثفة قبل الإمتحان الوطني للمراجعة الشاملة</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-number">5️⃣</span>
+                                <span class="benefit-text">🤝💬 تواصل، مواكبة و دعم طوال الموسم الدراسي</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="banner-price">
+                        <div class="price-tag">
+                            <span class="price-amount">💰 500 درهم</span>
+                            <span class="price-period">للموسم الدراسي كامل</span>
+                        </div>
+                        <div class="price-duration">من البداية حتى يوم الإمتحان الوطني</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lessons View -->
+            <div id="lessonsView" class="lessons-view hidden">
+                <div class="lessons-header">
+                    <button id="backBtn" class="back-btn">← العودة للوحدات</button>
+                    <h2 id="currentUnitTitle" class="section-title"></h2>
+                </div>
+                <div id="lessonsGrid" class="lessons-grid">
+                    <!-- Lessons will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Search Results View -->
+            <div id="searchResultsView" class="search-results-view hidden">
+                <div class="search-results-header">
+                    <button id="clearSearchBtn" class="back-btn">← مسح البحث</button>
+                    <h2 id="searchResultsTitle" class="section-title">نتائج البحث</h2>
+                </div>
+                <div id="searchResultsGrid" class="lessons-grid">
+                    <!-- Search results will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Teacher Profile Section -->
+            <div class="teacher-profile">
+                <div class="teacher-info">
+                    <div class="teacher-avatar">
+                        <div class="avatar-container">
+                            <img src="teacher.png" alt="الأستاذ سيمو" class="teacher-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="avatar-placeholder">
+                                <span class="avatar-text">س</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teacher-details">
+                        <h3 class="teacher-name">الأستاذ سيمو</h3>
+                        <p class="teacher-title">مدرس اللغة الإنجليزية المحترف</p>
+                    </div>
+                </div>
+                <div class="teacher-description">
+                    <p>مرحباً بكم في English With Simo! أنا الأستاذ سيمو، مدرس اللغة الإنجليزية بخبرة تزيد عن 10 سنوات في التدريس. أحمل شهادة الماجستير في اللغة الإنجليزية وآدابها، وأختص في تدريس جميع المستويات، من المبتدئين إلى المتقدمين والمتمكنين. هدفي هو مساعدة الطلاب على إتقان اللغة الإنجليزية بطريقة سهلة وممتعة، مع التركيز على المهارات العملية والتحضير الجيد للامتحانات. انضموا إلى آلاف الطلاب الذين حققوا نتائج ممتازة معنا!</p>
+                </div>
+                <div class="teacher-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">سنوات خبرة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">طالب نجح</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">60+</div>
+                        <div class="stat-label">درس متاح</div>
+                    </div>
+                </div>
+            </div>
+            
+        <!-- Social Media Section -->
+        <div class="social-section">
+            <h3 class="social-title">تابعنا على وسائل التواصل الاجتماعي</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/englishwithsimo/" target="_blank" class="social-icon facebook" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.youtube.com/@EnglishWithSimo" target="_blank" class="social-icon youtube" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://www.instagram.com/englishwithsimo_official/" target="_blank" class="social-icon instagram" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="mailto:englishwithsimo@gmail.com" class="social-icon email" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="tel:+212600583968" class="social-icon phone" title="Phone">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <a href="https://www.tiktok.com/@englishwithsimo1" target="_blank" class="social-icon tiktok" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <p class="footer-text">© 2025 English With Simo | All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="theme-toggle" title="تبديل الوضع المظلم/الفاتح">
+        🌙
+    </button>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://api.whatsapp.com/send?phone=212600583968" target="_blank" class="whatsapp-float" title="تواصل معنا على واتساب">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">تواصل معنا عبر واتساب</span>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
