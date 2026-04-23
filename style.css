@@ -1847,20 +1847,24 @@ img {
 }
 
 /* ===== Shared Responsive Enhancements ===== */
-
-/* Shared sizing + readability */
-h1 {
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    line-height: 1.25;
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
 }
 
-h2 {
-    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-    line-height: 1.3;
+*,
+*::before,
+*::after {
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
-.section-title {
-    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-inline: clamp(1rem, 4vw, 2rem);
 }
 
 .main-content {
@@ -1873,7 +1877,7 @@ h2 {
 .responsive-site .ad-container,
 .responsive-site .blog-thumbnail {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1280px;
     margin-inline: auto;
 }
 
@@ -1884,40 +1888,211 @@ h2 {
     padding-inline: clamp(0.75rem, 3vw, 1.5rem);
 }
 
-.responsive-site iframe,
-.responsive-site video,
-.responsive-site canvas {
+/* Typography */
+body {
+    line-height: clamp(1.4, 2vw, 1.8);
+}
+
+.responsive-site h1 {
+    font-size: clamp(1.8rem, 5vw, 3.5rem) !important;
+}
+
+.responsive-site h2 {
+    font-size: clamp(1.5rem, 4vw, 2.8rem) !important;
+}
+
+.responsive-site h3 {
+    font-size: clamp(1.25rem, 3vw, 2rem) !important;
+}
+
+.responsive-site h4 {
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem) !important;
+}
+
+.responsive-site h5,
+.responsive-site h6 {
+    font-size: clamp(1rem, 2vw, 1.3rem) !important;
+}
+
+.responsive-site h1,
+.responsive-site h2,
+.responsive-site h3 {
+    line-height: clamp(1.1, 1.5vw, 1.3) !important;
+    letter-spacing: clamp(-0.02em, -0.01vw, 0) !important;
+}
+
+.responsive-site p,
+.responsive-site li,
+.responsive-site td,
+.responsive-site th,
+.responsive-site label,
+.responsive-site span {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+}
+
+.responsive-site small,
+.responsive-site caption,
+.responsive-site .hint {
+    font-size: clamp(0.75rem, 1.5vw, 0.95rem) !important;
+}
+
+.responsive-site button,
+.responsive-site a,
+.responsive-site input,
+.responsive-site select,
+.responsive-site textarea {
+    font-size: clamp(0.9rem, 1.8vw, 1rem) !important;
+}
+
+.responsive-site nav a,
+.responsive-site .nav-link {
+    font-size: clamp(0.85rem, 1.5vw, 1rem) !important;
+}
+
+.responsive-site .hero-title {
+    font-size: clamp(2rem, 6vw, 4.5rem) !important;
+}
+
+.responsive-site .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.5rem) !important;
+}
+
+.responsive-site .section-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem) !important;
+}
+
+.responsive-site .card-title {
+    font-size: clamp(1rem, 2vw, 1.4rem) !important;
+}
+
+.responsive-site .card-text {
+    font-size: clamp(0.85rem, 1.5vw, 1rem) !important;
+}
+
+.responsive-site footer,
+.responsive-site .footer {
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem) !important;
+}
+
+/* Fluid media */
+img,
+svg,
+video,
+iframe,
+canvas {
     max-width: 100%;
+    height: auto;
+    display: block;
 }
 
-.responsive-site .table-responsive {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-.responsive-site [style*="background-image"] {
+.responsive-site [style*="background-image"],
+[style*="background-image"],
+.hero,
+.banner,
+.cover {
     background-size: cover !important;
     background-position: center !important;
 }
 
-/* Form + touch-target usability */
-.responsive-site input,
-.responsive-site select,
-.responsive-site textarea {
-    width: 100%;
-    max-width: 100%;
-    min-height: 44px;
+.hero,
+.banner {
+    min-height: clamp(250px, 50vw, 600px);
 }
 
-.responsive-site button,
-.responsive-site .eng-btn,
-.responsive-site .back-btn,
-.responsive-site .search-btn,
-.responsive-site .interactive-exercises-btn,
-.responsive-site a.exercise-link,
-.responsive-site .cta-button {
+/* Fluid spacing */
+section,
+.section {
+    padding: clamp(2rem, 6vw, 6rem) clamp(1rem, 4vw, 3rem);
+}
+
+.card,
+.unit-card,
+.lesson-card,
+.exercise-card,
+.eng-exercise-card {
+    padding: clamp(1rem, 3vw, 2rem);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+.hero,
+.promotional-banner {
+    padding: clamp(3rem, 8vw, 8rem) clamp(1rem, 4vw, 3rem);
+}
+
+/* Touch-friendly interactions */
+button,
+.btn,
+a.btn,
+input[type="submit"],
+input[type="button"],
+.eng-btn,
+.back-btn,
+.search-btn,
+.interactive-exercises-btn,
+a.exercise-link,
+.cta-button {
     min-height: 44px;
+    min-width: 44px;
+    padding: clamp(0.5rem, 1.5vw, 0.85rem) clamp(1rem, 3vw, 2rem);
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+}
+
+/* Fluid icons */
+.responsive-site .icon,
+.responsive-site svg {
+    width: clamp(1rem, 3vw, 2rem);
+    height: clamp(1rem, 3vw, 2rem);
+}
+
+.responsive-site i[class] {
+    font-size: clamp(1rem, 2.6vw, 1.5rem) !important;
+}
+
+/* Layout patterns */
+.grid,
+.cards,
+.features,
+.team,
+.pricing,
+.units-grid,
+.lessons-grid,
+.interactive-exercises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
+}
+
+.flex-row,
+.lessons-header,
+.lessons-actions,
+.header-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+.flex-child,
+.col,
+[class*="col-"] {
+    flex: 1 1 clamp(200px, 40%, 100%);
+    min-width: 0;
+}
+
+/* Form and table responsiveness */
+input:not(.eng-blank),
+select:not(.eng-dropdown),
+textarea {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+    padding: clamp(0.5rem, 1.5vw, 0.85rem);
+}
+
+.responsive-site .table-responsive,
+div[style*="overflow-x: auto"] {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* ===== Shared Top Navigation (desktop + mobile) ===== */
@@ -1945,7 +2120,7 @@ h2 {
 }
 
 .site-desktop-nav {
-    display: flex;
+    display: none;
     align-items: center;
     gap: clamp(0.6rem, 2vw, 1rem);
 }
@@ -1955,7 +2130,7 @@ h2 {
     color: var(--text-primary);
     text-decoration: none;
     font-weight: 600;
-    font-size: clamp(0.9rem, 2vw, 1rem);
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
 }
 
 .site-desktop-nav a:hover,
@@ -1964,7 +2139,10 @@ h2 {
 }
 
 .site-menu-toggle {
-    display: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
     width: 44px;
     height: 44px;
     border: 1px solid var(--border-color);
@@ -1977,6 +2155,7 @@ h2 {
 
 .site-mobile-nav {
     display: none;
+    width: 100%;
     flex-direction: column;
     gap: 0.25rem;
     padding: 0.75rem 1rem;
@@ -2034,6 +2213,11 @@ h2 {
 
 .responsive-site .eng-blank {
     margin: 0.2rem 0;
+    width: auto;
+    max-width: min(100%, 16rem);
+    min-width: 5.5rem;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .responsive-site .eng-dropdown {
@@ -2055,132 +2239,194 @@ h2 {
     flex: 1 1 180px;
 }
 
-/* ===== Mobile-first defaults ===== */
-.units-grid,
-.lessons-grid,
-.interactive-exercises-grid {
-    grid-template-columns: 1fr;
+/* Inline style fallback overrides for long exercise blocks */
+[style*="max-width: 800px"],
+[style*="max-width: 700px"] {
+    max-width: 100% !important;
+    padding: clamp(1rem, 4vw, 1.75rem) !important;
 }
 
-/* === MOBILE (up to 480px) === */
-@media (max-width: 480px) {
-    .site-topbar {
-        padding-inline: 0.75rem;
+[style*="font-size: 24px"] {
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem) !important;
+}
+
+[style*="font-size: 18px"] {
+    font-size: clamp(0.95rem, 2.2vw, 1.1rem) !important;
+}
+
+[style*="line-height: 300%"] {
+    line-height: clamp(1.6, 2.2vw, 2) !important;
+}
+
+/* === MOBILE (base styles — no query needed) === */
+.search-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-input,
+.search-btn {
+    border-radius: var(--border-radius);
+}
+
+.site-logo-link {
+    max-width: calc(100% - 52px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lessons-header {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.interactive-exercises-btn,
+.back-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* === LARGE MOBILE === */
+@media (min-width: 481px) {
+    .search-container {
+        flex-direction: row;
     }
 
     .site-logo-link {
-        max-width: calc(100% - 52px);
-        overflow: hidden;
-        text-overflow: ellipsis;
+        max-width: none;
     }
+}
 
-    .site-desktop-nav {
+/* === TABLET === */
+@media (min-width: 768px) {
+    .site-menu-toggle {
         display: none;
     }
 
-    .site-menu-toggle {
-        display: inline-flex;
+    .site-desktop-nav {
+        display: flex;
+    }
+
+    .site-mobile-nav {
+        display: none !important;
+    }
+
+    .lessons-header {
+        flex-direction: row;
         align-items: center;
-        justify-content: center;
     }
 
-    .search-container {
-        flex-direction: column;
-    }
-
-    .search-input,
-    .search-btn {
-        border-radius: var(--border-radius);
+    .interactive-exercises-btn,
+    .back-btn {
+        width: auto;
     }
 
     .units-grid,
     .lessons-grid,
     .interactive-exercises-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .lessons-actions {
-        justify-content: stretch;
-    }
-
-    .interactive-exercises-btn,
-    .back-btn {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-/* === LARGE MOBILE / SMALL TABLET (up to 767px) === */
-@media (max-width: 767px) {
-    .site-desktop-nav {
-        display: none;
-    }
-
-    .site-menu-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-
-    .site-mobile-nav {
-        display: none;
-    }
-
-    .site-mobile-nav.is-open {
-        display: flex;
-    }
-
-    .lessons-header {
-        flex-direction: column;
-        align-items: stretch;
-    }
-}
-
-/* === TABLET (768px to 1024px) === */
-@media (min-width: 768px) and (max-width: 1024px) {
-    .site-menu-toggle {
-        display: none;
-    }
-
-    .site-desktop-nav {
-        display: flex;
-    }
-
-    .site-mobile-nav {
-        display: none !important;
-    }
-
-    .units-grid {
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
-
-    .lessons-grid,
-    .interactive-exercises-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
 }
 
-/* === DESKTOP (1025px and above) === */
+/* === LAPTOP === */
 @media (min-width: 1025px) {
-    .site-menu-toggle {
-        display: none;
-    }
-
-    .site-desktop-nav {
-        display: flex;
-    }
-
-    .site-mobile-nav {
-        display: none !important;
-    }
-
-    .units-grid {
+    .units-grid,
+    .interactive-exercises-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 
     .lessons-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+/* === DESKTOP === */
+@media (min-width: 1281px) {
+    .container {
+        padding-inline: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .lessons-grid {
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+/* ===== Fluid typography override for named components ===== */
+.loading-text,
+.slogan,
+.subtitle,
+.benefit-text,
+.price-period,
+.price-duration,
+.exercise-description,
+.teacher-title,
+.teacher-description p,
+.stat-label,
+.footer-text,
+.whatsapp-tooltip {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+}
+
+.main-title,
+.banner-title,
+.section-title,
+.lesson-title-arabic,
+.teacher-name,
+.social-title {
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    line-height: clamp(1.1, 1.5vw, 1.3);
+}
+
+.lesson-title-english,
+.unit-number,
+.unit-title-arabic,
+.exercise-title,
+.benefits-title,
+.price-amount,
+.stat-number {
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+}
+
+.unit-title-english,
+.unit-lessons-count,
+.exercise-badge,
+.search-input,
+.search-btn {
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+}
+
+.unit-icon,
+.banner-icon,
+.exercise-empty-icon,
+.avatar-text {
+    font-size: clamp(1.4rem, 4vw, 2.8rem);
+}
+
+.social-icon i,
+.theme-toggle,
+.whatsapp-float i,
+i[class] {
+    font-size: clamp(1rem, 2.8vw, 1.5rem);
+}
+
+/* ===== Fluid icon/button dimensions ===== */
+.title-image,
+.loading-spinner,
+.social-icon,
+.theme-toggle,
+.whatsapp-float {
+    width: clamp(2.25rem, 6vw, 3.5rem);
+    height: clamp(2.25rem, 6vw, 3.5rem);
+}
+
+/* Keep desktop heading scale balanced */
+@media (min-width: 1281px) {
+    .main-title {
+        font-size: clamp(2.2rem, 3.8vw, 3.5rem);
+    }
+
+    .banner-title,
+    .section-title {
+        font-size: clamp(1.8rem, 2.8vw, 2.8rem);
     }
 }
