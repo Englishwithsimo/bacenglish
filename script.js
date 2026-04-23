@@ -45,6 +45,15 @@ class VideoPlatform {
                     link: 'unit4-interactive-exercises.html',
                     buttonText: 'فتح التمارين التفاعلية'
                 }
+            ],
+            5: [
+                {
+                    type: 'الوحدة الخامسة',
+                    title: 'Unit Five Interactive Exercises',
+                    description: 'Women and Society practice for vocabulary, language functions, passive voice, and writing.',
+                    link: 'unit5-interactive-exercises.html',
+                    buttonText: 'فتح التمارين التفاعلية'
+                }
             ]
         };
         
