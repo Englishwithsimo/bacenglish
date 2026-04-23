@@ -18,6 +18,15 @@ class VideoPlatform {
                     link: 'unit1-interactive-exercises.html',
                     buttonText: 'فتح التمارين التفاعلية'
                 }
+            ],
+            2: [
+                {
+                    type: 'الوحدة الثانية',
+                    title: 'Unit Two Interactive Exercises',
+                    description: 'Humour and Comedy practice exercises for vocabulary, language functions, modals, and writing.',
+                    link: 'unit2-interactive-exercises.html',
+                    buttonText: 'فتح التمارين التفاعلية'
+                }
             ]
         };
         
