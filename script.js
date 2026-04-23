@@ -602,10 +602,18 @@ class VideoPlatform {
             <p class="exercise-description">${description}</p>
             ${
                 exercise.link
-                    ? `<a href="${exercise.link}" class="exercise-link">${buttonText}</a>`
+                    ? `<button type="button" class="exercise-link exercise-link-button" data-exercise-link="${exercise.link}">${buttonText}</button>`
                     : '<span class="exercise-link disabled">سيتم نشر التمرين قريباً</span>'
             }
         `;
+
+        const openExerciseButton = card.querySelector('.exercise-link-button');
+        if (openExerciseButton) {
+            openExerciseButton.addEventListener('click', () => {
+                // Force same-tab navigation for interactive exercises.
+                window.location.assign(exercise.link);
+            });
+        }
 
         return card;
     }
