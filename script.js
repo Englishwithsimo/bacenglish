@@ -90,6 +90,15 @@ class VideoPlatform {
                     link: 'unit9-interactive-exercises.html',
                     buttonText: 'فتح التمارين التفاعلية'
                 }
+            ],
+            10: [
+                {
+                    type: 'الوحدة العاشرة',
+                    title: 'Unit Ten Interactive Exercises',
+                    description: 'Brain Drain practice for vocabulary, relative pronouns, wishes/regrets, and writing.',
+                    link: 'unit10-interactive-exercises.html',
+                    buttonText: 'فتح التمارين التفاعلية'
+                }
             ]
         };
         
