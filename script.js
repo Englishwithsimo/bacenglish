@@ -682,6 +682,8 @@ class VideoPlatform {
             const iframeDocument = frame.contentDocument;
             if (!iframeDocument || !iframeDocument.body) return;
 
+            this.applyInlineExerciseFieldOverrides(iframeDocument);
+
             const bodyHeight = iframeDocument.body.scrollHeight || 0;
             const docHeight = iframeDocument.documentElement ? iframeDocument.documentElement.scrollHeight : 0;
             const nextHeight = Math.max(bodyHeight, docHeight, 640);
@@ -689,6 +691,29 @@ class VideoPlatform {
         } catch (error) {
             // Ignore frame sizing errors and keep fallback CSS height.
         }
+    }
+
+    applyInlineExerciseFieldOverrides(iframeDocument) {
+        if (!iframeDocument || !iframeDocument.head) return;
+
+        if (iframeDocument.getElementById('inlineExerciseFieldOverrides')) {
+            return;
+        }
+
+        const styleElement = iframeDocument.createElement('style');
+        styleElement.id = 'inlineExerciseFieldOverrides';
+        styleElement.textContent = `
+            .eng-question-text .eng-dropdown,
+            .eng-question-text select.eng-dropdown {
+                display: inline-block !important;
+                width: auto !important;
+                max-width: min(100%, 14rem) !important;
+                min-width: 7.5rem !important;
+                vertical-align: middle !important;
+                margin: 0 0.3rem !important;
+            }
+        `;
+        iframeDocument.head.appendChild(styleElement);
     }
 
     /**

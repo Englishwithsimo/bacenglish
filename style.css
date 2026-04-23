@@ -2032,9 +2032,17 @@ h2 {
     overflow-wrap: anywhere;
 }
 
-.responsive-site .eng-blank,
-.responsive-site .eng-dropdown {
+.responsive-site .eng-blank {
     margin: 0.2rem 0;
+}
+
+.responsive-site .eng-dropdown {
+    margin: 0 0.3rem !important;
+    width: auto !important;
+    max-width: min(100%, 14rem) !important;
+    min-width: 7.5rem !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
 }
 
 .responsive-site .eng-buttons {
