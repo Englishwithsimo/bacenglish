@@ -63,6 +63,15 @@ class VideoPlatform {
                     link: 'unit6-interactive-exercises.html',
                     buttonText: 'فتح التمارين التفاعلية'
                 }
+            ],
+            7: [
+                {
+                    type: 'الوحدة السابعة',
+                    title: 'Unit Seven Interactive Exercises',
+                    description: 'Citizenship practice for vocabulary, language functions, reported speech, and writing.',
+                    link: 'unit7-interactive-exercises.html',
+                    buttonText: 'فتح التمارين التفاعلية'
+                }
             ]
         };
         
