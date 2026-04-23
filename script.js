@@ -36,6 +36,15 @@ class VideoPlatform {
                     link: 'unit3-interactive-exercises.html',
                     buttonText: 'فتح التمارين التفاعلية'
                 }
+            ],
+            4: [
+                {
+                    type: 'الوحدة الرابعة',
+                    title: 'Unit Four Interactive Exercises',
+                    description: 'Environment and Social Issues practice for vocabulary, language functions, grammar, and writing.',
+                    link: 'unit4-interactive-exercises.html',
+                    buttonText: 'فتح التمارين التفاعلية'
+                }
             ]
         };
         
