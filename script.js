@@ -54,6 +54,15 @@ class VideoPlatform {
                     link: 'unit5-interactive-exercises.html',
                     buttonText: 'فتح التمارين التفاعلية'
                 }
+            ],
+            6: [
+                {
+                    type: 'الوحدة السادسة',
+                    title: 'Unit Six Interactive Exercises',
+                    description: 'Culture and Values practice for vocabulary, language functions, phrasal verbs, and writing.',
+                    link: 'unit6-interactive-exercises.html',
+                    buttonText: 'فتح التمارين التفاعلية'
+                }
             ]
         };
         
