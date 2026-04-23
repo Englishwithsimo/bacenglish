@@ -593,6 +593,7 @@ class VideoPlatform {
         const title = exercise.title || `تمرين ${index + 1}`;
         const description = exercise.description || 'حل هذا التمرين لقياس فهمك للدروس.';
         const buttonText = exercise.buttonText || 'ابدأ التمرين';
+        const closeText = 'إخفاء التمارين';
 
         card.innerHTML = `
             <div class="exercise-card-header">
@@ -602,20 +603,92 @@ class VideoPlatform {
             <p class="exercise-description">${description}</p>
             ${
                 exercise.link
-                    ? `<button type="button" class="exercise-link exercise-link-button" data-exercise-link="${exercise.link}">${buttonText}</button>`
+                    ? `
+                        <button type="button" class="exercise-link exercise-link-button exercise-toggle-btn" aria-expanded="false" data-open-label="${buttonText}" data-close-label="${closeText}">
+                            ${buttonText}
+                        </button>
+                        <div class="exercise-inline-panel" hidden>
+                            <p class="exercise-inline-hint">حل التمارين مباشرة في نفس الصفحة.</p>
+                            <iframe
+                                class="exercise-inline-frame"
+                                title="${title}"
+                                loading="lazy"
+                                referrerpolicy="strict-origin-when-cross-origin">
+                            </iframe>
+                        </div>
+                    `
                     : '<span class="exercise-link disabled">سيتم نشر التمرين قريباً</span>'
             }
         `;
 
-        const openExerciseButton = card.querySelector('.exercise-link-button');
-        if (openExerciseButton) {
+        const openExerciseButton = card.querySelector('.exercise-toggle-btn');
+        const exerciseInlinePanel = card.querySelector('.exercise-inline-panel');
+        const exerciseInlineFrame = card.querySelector('.exercise-inline-frame');
+
+        if (openExerciseButton && exerciseInlinePanel && exerciseInlineFrame) {
+            const openLabel = openExerciseButton.getAttribute('data-open-label') || buttonText;
+            const closeLabel = openExerciseButton.getAttribute('data-close-label') || closeText;
+
+            const closePanel = (button, panel) => {
+                panel.setAttribute('hidden', '');
+                panel.classList.remove('is-open');
+                button.textContent = openLabel;
+                button.setAttribute('aria-expanded', 'false');
+            };
+
             openExerciseButton.addEventListener('click', () => {
-                // Force same-tab navigation for interactive exercises.
-                window.location.assign(exercise.link);
+                const isClosed = exerciseInlinePanel.hasAttribute('hidden');
+
+                if (isClosed) {
+                    const interactiveExercisesGrid = document.getElementById('interactiveExercisesGrid');
+                    if (interactiveExercisesGrid) {
+                        interactiveExercisesGrid.querySelectorAll('.exercise-inline-panel.is-open').forEach((panel) => {
+                            if (panel === exerciseInlinePanel) return;
+                            const panelCard = panel.closest('.exercise-card');
+                            const panelButton = panelCard ? panelCard.querySelector('.exercise-toggle-btn') : null;
+                            if (panelButton) {
+                                closePanel(panelButton, panel);
+                            }
+                        });
+                    }
+
+                    exerciseInlinePanel.removeAttribute('hidden');
+                    exerciseInlinePanel.classList.add('is-open');
+                    openExerciseButton.textContent = closeLabel;
+                    openExerciseButton.setAttribute('aria-expanded', 'true');
+
+                    if (!exerciseInlineFrame.src) {
+                        exerciseInlineFrame.src = exercise.link;
+                    } else {
+                        this.fitExerciseFrameHeight(exerciseInlineFrame);
+                    }
+                } else {
+                    closePanel(openExerciseButton, exerciseInlinePanel);
+                }
+            });
+
+            exerciseInlineFrame.addEventListener('load', () => {
+                this.fitExerciseFrameHeight(exerciseInlineFrame);
             });
         }
 
         return card;
+    }
+
+    fitExerciseFrameHeight(frame) {
+        if (!frame) return;
+
+        try {
+            const iframeDocument = frame.contentDocument;
+            if (!iframeDocument || !iframeDocument.body) return;
+
+            const bodyHeight = iframeDocument.body.scrollHeight || 0;
+            const docHeight = iframeDocument.documentElement ? iframeDocument.documentElement.scrollHeight : 0;
+            const nextHeight = Math.max(bodyHeight, docHeight, 640);
+            frame.style.height = `${Math.min(nextHeight + 24, 2400)}px`;
+        } catch (error) {
+            // Ignore frame sizing errors and keep fallback CSS height.
+        }
     }
 
     /**

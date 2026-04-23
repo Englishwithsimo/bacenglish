@@ -763,6 +763,26 @@ img {
     appearance: none;
 }
 
+.exercise-inline-panel {
+    margin-top: 0.85rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    overflow: hidden;
+}
+
+.exercise-inline-panel.hidden {
+    display: none;
+}
+
+.exercise-inline-frame {
+    width: 100%;
+    min-height: clamp(520px, 75vh, 980px);
+    border: 0;
+    display: block;
+    background: #fff;
+}
+
 .exercise-link:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-light);
