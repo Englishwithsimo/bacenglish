@@ -603,6 +603,41 @@ body {
     gap: 1rem;
 }
 
+.lessons-actions {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.interactive-exercises-btn {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.8rem 1.2rem;
+    font-family: var(--font-arabic);
+    font-size: 1rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-light);
+    transition: all var(--transition-fast);
+}
+
+.interactive-exercises-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.interactive-exercises-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 .back-btn {
     background: var(--secondary-gradient);
     color: white;
@@ -627,6 +662,112 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
+}
+
+/* ===== Interactive Exercises ===== */
+.interactive-exercises-view {
+    animation: fadeInUp var(--transition-medium);
+}
+
+.interactive-exercises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.exercise-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-large);
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--bg-card), var(--bg-card)), var(--primary-gradient);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: var(--shadow-light);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    transition: all var(--transition-medium);
+}
+
+.exercise-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-medium);
+}
+
+.exercise-card-header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.exercise-badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-family: var(--font-arabic);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.exercise-title {
+    font-family: var(--font-arabic);
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    margin: 0;
+}
+
+.exercise-description {
+    font-family: var(--font-arabic);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.exercise-link {
+    margin-top: auto;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: var(--accent-gradient);
+    color: white;
+    border-radius: var(--border-radius);
+    padding: 0.7rem 1rem;
+    font-family: var(--font-arabic);
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.exercise-link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-light);
+}
+
+.exercise-link.disabled {
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    cursor: default;
+}
+
+.exercise-link.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.exercise-card-empty {
+    text-align: center;
+    align-items: center;
+}
+
+.exercise-empty-icon {
+    font-size: 2rem;
+    color: var(--text-muted);
 }
 
 .lesson-card {
@@ -1208,6 +1349,10 @@ body {
         align-items: stretch;
         text-align: center;
     }
+
+    .lessons-actions {
+        justify-content: center;
+    }
     
     .back-btn {
         align-self: flex-start;
@@ -1406,6 +1551,15 @@ body {
     
     .lessons-grid {
         gap: 1rem;
+    }
+
+    .interactive-exercises-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .interactive-exercises-grid {
+        grid-template-columns: 1fr;
     }
     
     .lesson-title-container {

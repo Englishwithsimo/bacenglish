@@ -9,6 +9,7 @@ class VideoPlatform {
         this.currentView = 'units';
         this.currentUnit = null;
         this.searchResults = [];
+        this.interactiveExercisesData = {};
         
         // Unit icons mapping (Font Awesome)
         this.unitIcons = {
@@ -49,6 +50,7 @@ class VideoPlatform {
     async init() {
         try {
             await this.loadVideosData();
+            this.syncInteractiveExercisesUnits();
             console.log('Videos data loaded:', this.videosData.length, 'units');
             this.setupEventListeners();
             this.renderUnits();
@@ -196,6 +198,23 @@ class VideoPlatform {
         const clearSearchBtn = document.getElementById('clearSearchBtn');
         if (clearSearchBtn) {
             clearSearchBtn.addEventListener('click', () => this.clearSearch());
+        }
+
+        // Interactive exercises buttons
+        const interactiveExercisesBtn = document.getElementById('interactiveExercisesBtn');
+        if (interactiveExercisesBtn) {
+            interactiveExercisesBtn.addEventListener('click', () => this.showInteractiveExercises());
+        }
+
+        const backToLessonsBtn = document.getElementById('backToLessonsBtn');
+        if (backToLessonsBtn) {
+            backToLessonsBtn.addEventListener('click', () => {
+                if (this.currentUnit) {
+                    this.showView('lessons');
+                } else {
+                    this.showUnits();
+                }
+            });
         }
 
         // Search functionality
@@ -382,7 +401,122 @@ class VideoPlatform {
         }
 
         this.renderLessons(unit.lessons);
+        this.updateInteractiveExercisesButton(unit);
         this.showView('lessons');
+    }
+
+    /**
+     * Ensure each unit has an interactive exercises slot
+     */
+    syncInteractiveExercisesUnits() {
+        const syncedData = {};
+
+        this.videosData.forEach(unit => {
+            syncedData[unit.number] = this.interactiveExercisesData[unit.number] || [];
+        });
+
+        this.interactiveExercisesData = syncedData;
+    }
+
+    /**
+     * Return interactive exercises for a unit
+     */
+    getInteractiveExercisesForUnit(unitNumber) {
+        return this.interactiveExercisesData[unitNumber] || [];
+    }
+
+    /**
+     * Update interactive exercises button label based on current unit
+     */
+    updateInteractiveExercisesButton(unit) {
+        const interactiveExercisesBtn = document.getElementById('interactiveExercisesBtn');
+        if (!interactiveExercisesBtn) return;
+
+        if (!unit) {
+            interactiveExercisesBtn.innerHTML = '<i class="fas fa-pen-ruler"></i><span>تمارين تفاعلية</span>';
+            interactiveExercisesBtn.disabled = true;
+            return;
+        }
+
+        const exercisesCount = this.getInteractiveExercisesForUnit(unit.number).length;
+        const label = exercisesCount > 0 ? `تمارين تفاعلية (${exercisesCount})` : 'تمارين تفاعلية';
+
+        interactiveExercisesBtn.innerHTML = `<i class="fas fa-pen-ruler"></i><span>${label}</span>`;
+        interactiveExercisesBtn.disabled = false;
+    }
+
+    /**
+     * Show interactive exercises for the selected unit
+     */
+    showInteractiveExercises() {
+        if (!this.currentUnit) return;
+
+        this.currentView = 'interactiveExercises';
+        this.renderInteractiveExercises(this.currentUnit);
+        this.showView('interactiveExercises');
+    }
+
+    /**
+     * Render interactive exercises for a unit
+     */
+    renderInteractiveExercises(unit) {
+        const interactiveExercisesTitle = document.getElementById('interactiveExercisesTitle');
+        const interactiveExercisesGrid = document.getElementById('interactiveExercisesGrid');
+        if (!interactiveExercisesGrid) return;
+
+        if (interactiveExercisesTitle) {
+            interactiveExercisesTitle.textContent = `تمارين تفاعلية - الوحدة ${unit.number}`;
+        }
+
+        const exercises = this.getInteractiveExercisesForUnit(unit.number);
+        interactiveExercisesGrid.innerHTML = '';
+
+        if (exercises.length === 0) {
+            interactiveExercisesGrid.innerHTML = `
+                <div class="exercise-card exercise-card-empty">
+                    <div class="exercise-empty-icon"><i class="fas fa-hourglass-half"></i></div>
+                    <h3 class="exercise-title">لا توجد تمارين تفاعلية بعد</h3>
+                    <p class="exercise-description">
+                        سيتم إضافة تمارين تفاعلية للوحدة ${unit.number} قريباً.
+                    </p>
+                </div>
+            `;
+            return;
+        }
+
+        exercises.forEach((exercise, index) => {
+            const exerciseCard = this.createInteractiveExerciseCard(exercise, index);
+            interactiveExercisesGrid.appendChild(exerciseCard);
+        });
+    }
+
+    /**
+     * Create interactive exercise card
+     */
+    createInteractiveExerciseCard(exercise, index) {
+        const card = document.createElement('div');
+        card.className = 'exercise-card fade-in';
+        card.style.animationDelay = `${index * 0.08}s`;
+
+        const typeLabel = exercise.type || 'تمرين تفاعلي';
+        const title = exercise.title || `تمرين ${index + 1}`;
+        const description = exercise.description || 'حل هذا التمرين لقياس فهمك للدروس.';
+        const buttonText = exercise.buttonText || 'ابدأ التمرين';
+
+        card.innerHTML = `
+            <div class="exercise-card-header">
+                <span class="exercise-badge">${typeLabel}</span>
+            </div>
+            <h3 class="exercise-title">${title}</h3>
+            <p class="exercise-description">${description}</p>
+            ${
+                exercise.link
+                    ? `<a href="${exercise.link}" target="_blank" rel="noopener noreferrer" class="exercise-link">${buttonText}</a>`
+                    : '<span class="exercise-link disabled">سيتم نشر التمرين قريباً</span>'
+            }
+        `;
+
+        return card;
     }
 
     /**
@@ -550,6 +684,7 @@ class VideoPlatform {
     showUnits() {
         this.currentView = 'units';
         this.currentUnit = null;
+        this.updateInteractiveExercisesButton(null);
         this.showView('units');
     }
 
@@ -557,7 +692,7 @@ class VideoPlatform {
      * Show specific view and hide others
      */
     showView(viewName) {
-        const views = ['units', 'lessons', 'searchResults'];
+        const views = ['units', 'lessons', 'interactiveExercises', 'searchResults'];
         
         views.forEach(view => {
             const element = document.getElementById(`${view}View`);
