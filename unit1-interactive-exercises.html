@@ -7,9 +7,27 @@
     <link rel="stylesheet" href="https://englishwithsimo.github.io/new2026/styles.css">
     <link rel="stylesheet" href="https://englishwithsimo.github.io/offer_ad/styles.css">
     <link rel="stylesheet" href="https://englishwithsimo.github.io/WritingForm/styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="blog-thumbnail">
+<body class="responsive-site">
+    
+    <!-- SITE_TOPBAR -->
+    <div class="site-topbar" role="banner">
+        <a href="index.html" class="site-logo-link">English With Simo</a>
+        <nav class="site-desktop-nav" aria-label="Primary navigation">
+            <a href="index.html">الرئيسية</a>
+            <a href="index.html#unitsView">الوحدات</a>
+            <a href="https://api.whatsapp.com/send?phone=212600583968" target="_blank" rel="noopener noreferrer">واتساب</a>
+        </nav>
+        <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="siteMobileMenu" aria-label="Open navigation menu">☰</button>
+    </div>
+    <nav id="siteMobileMenu" class="site-mobile-nav" aria-label="Mobile navigation">
+        <a href="index.html">الرئيسية</a>
+        <a href="index.html#unitsView">الوحدات</a>
+        <a href="https://api.whatsapp.com/send?phone=212600583968" target="_blank" rel="noopener noreferrer">واتساب</a>
+    </nav>
+
+<div class="blog-thumbnail">
         <img src="https://i.postimg.cc/hvZMfMV6/Unit-One-Interactive-Exercises-By-English-With-Simo.png" alt="Blog post thumbnail" class="thumbnail-image">
         <div class="thumbnail-content">
             <h3 class="thumbnail-title">تمارين تفاعلية لتلاميذ الثانية بكالوريا</h3>
@@ -652,5 +670,43 @@
 
     <script src="https://englishwithsimo.github.io/new2026/script.js"></script>
     <script src="https://englishwithsimo.github.io/WritingForm/script.js"></script>
+
+    <script>
+    (function siteResponsiveEnhancer() {
+        const menuToggle = document.querySelector('.site-menu-toggle');
+        const mobileMenu = document.getElementById('siteMobileMenu');
+
+        if (menuToggle && mobileMenu) {
+            const toggleMenu = () => {
+                const isOpen = mobileMenu.classList.toggle('is-open');
+                menuToggle.setAttribute('aria-expanded', String(isOpen));
+                menuToggle.textContent = isOpen ? '✕' : '☰';
+                menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+            };
+
+            menuToggle.addEventListener('click', toggleMenu);
+
+            mobileMenu.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('is-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.textContent = '☰';
+                    menuToggle.setAttribute('aria-label', 'Open navigation menu');
+                });
+            });
+        }
+
+        document.querySelectorAll('table').forEach((table) => {
+            if (table.parentElement && table.parentElement.classList.contains('table-responsive')) {
+                return;
+            }
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-responsive';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        });
+    })();
+    </script>
+
 </body>
 </html>

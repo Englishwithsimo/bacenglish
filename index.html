@@ -20,8 +20,25 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2558451678837926"
     crossorigin="anonymous"></script>
 </head>
-<body>
-    <!-- Loading Animation -->
+<body class="responsive-site">
+    
+    <!-- SITE_TOPBAR -->
+    <div class="site-topbar" role="banner">
+        <a href="index.html" class="site-logo-link">English With Simo</a>
+        <nav class="site-desktop-nav" aria-label="Primary navigation">
+            <a href="index.html">الرئيسية</a>
+            <a href="index.html#unitsView">الوحدات</a>
+            <a href="https://api.whatsapp.com/send?phone=212600583968" target="_blank" rel="noopener noreferrer">واتساب</a>
+        </nav>
+        <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="siteMobileMenu" aria-label="Open navigation menu">☰</button>
+    </div>
+    <nav id="siteMobileMenu" class="site-mobile-nav" aria-label="Mobile navigation">
+        <a href="index.html">الرئيسية</a>
+        <a href="index.html#unitsView">الوحدات</a>
+        <a href="https://api.whatsapp.com/send?phone=212600583968" target="_blank" rel="noopener noreferrer">واتساب</a>
+    </nav>
+
+<!-- Loading Animation -->
     <div id="loading" class="loading-container">
         <div class="loading-spinner"></div>
         <p class="loading-text">جاري التحميل...</p>
@@ -224,6 +241,44 @@
 
     <!-- JavaScript -->
     <script src="script.js"></script>
+
+    <script>
+    (function siteResponsiveEnhancer() {
+        const menuToggle = document.querySelector('.site-menu-toggle');
+        const mobileMenu = document.getElementById('siteMobileMenu');
+
+        if (menuToggle && mobileMenu) {
+            const toggleMenu = () => {
+                const isOpen = mobileMenu.classList.toggle('is-open');
+                menuToggle.setAttribute('aria-expanded', String(isOpen));
+                menuToggle.textContent = isOpen ? '✕' : '☰';
+                menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+            };
+
+            menuToggle.addEventListener('click', toggleMenu);
+
+            mobileMenu.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('is-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.textContent = '☰';
+                    menuToggle.setAttribute('aria-label', 'Open navigation menu');
+                });
+            });
+        }
+
+        document.querySelectorAll('table').forEach((table) => {
+            if (table.parentElement && table.parentElement.classList.contains('table-responsive')) {
+                return;
+            }
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-responsive';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        });
+    })();
+    </script>
+
 </body>
 </html>
 

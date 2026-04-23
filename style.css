@@ -55,7 +55,9 @@
 }
 
 /* ===== Base Styles ===== */
-* {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -69,18 +71,28 @@ body {
     font-family: var(--font-arabic);
     background: var(--bg-primary);
     color: var(--text-primary);
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
     line-height: 1.6;
+    letter-spacing: 0.01em;
     transition: background-color var(--transition-medium), color var(--transition-medium);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 /* ===== Container ===== */
 .container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--container-padding);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* ===== Loading Animation ===== */
@@ -172,10 +184,10 @@ body {
 
 .main-title {
     font-family: var(--font-arabic);
-    font-size: 1.4rem;
+    font-size: clamp(1.8rem, 5vw, 3rem);
     font-weight: 700;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    line-height: 1.1;
+    line-height: 1.2;
     margin: 0;
 }
 
@@ -251,7 +263,7 @@ body {
 
 .section-title {
     font-family: var(--font-arabic);
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
     font-weight: 600;
     text-align: center;
     margin-bottom: 2rem;
@@ -1803,5 +1815,336 @@ body {
         break-inside: avoid;
         box-shadow: none;
         border: 1px solid #ccc;
+    }
+}
+
+/* ===== Shared Responsive Enhancements ===== */
+
+/* Shared sizing + readability */
+h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    line-height: 1.25;
+}
+
+h2 {
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    line-height: 1.3;
+}
+
+.section-title {
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+}
+
+.main-content {
+    padding: clamp(1rem, 4vw, 3rem) 0;
+}
+
+.responsive-site .main-content .container,
+.responsive-site .eng-exercise-container,
+.responsive-site .form-container,
+.responsive-site .ad-container,
+.responsive-site .blog-thumbnail {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+}
+
+.responsive-site .eng-exercise-container,
+.responsive-site .form-container,
+.responsive-site .ad-container,
+.responsive-site .blog-thumbnail {
+    padding-inline: clamp(0.75rem, 3vw, 1.5rem);
+}
+
+.responsive-site iframe,
+.responsive-site video,
+.responsive-site canvas {
+    max-width: 100%;
+}
+
+.responsive-site .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.responsive-site [style*="background-image"] {
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+/* Form + touch-target usability */
+.responsive-site input,
+.responsive-site select,
+.responsive-site textarea {
+    width: 100%;
+    max-width: 100%;
+    min-height: 44px;
+}
+
+.responsive-site button,
+.responsive-site .eng-btn,
+.responsive-site .back-btn,
+.responsive-site .search-btn,
+.responsive-site .interactive-exercises-btn,
+.responsive-site a.exercise-link,
+.responsive-site .cta-button {
+    min-height: 44px;
+}
+
+/* ===== Shared Top Navigation (desktop + mobile) ===== */
+.site-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: clamp(0.6rem, 2vw, 0.9rem) clamp(0.75rem, 3vw, 1.5rem);
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+}
+
+.site-logo-link {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-family: var(--font-english);
+    font-weight: 700;
+    font-size: clamp(1rem, 2.4vw, 1.2rem);
+    white-space: nowrap;
+}
+
+.site-desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.6rem, 2vw, 1rem);
+}
+
+.site-desktop-nav a,
+.site-mobile-nav a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.site-desktop-nav a:hover,
+.site-mobile-nav a:hover {
+    color: #6366f1;
+}
+
+.site-menu-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.site-mobile-nav {
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.site-mobile-nav a {
+    display: block;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: var(--bg-secondary);
+}
+
+.site-mobile-nav.is-open {
+    display: flex;
+}
+
+/* ===== Exercise pages fallback layout ===== */
+.responsive-site .eng-header,
+.responsive-site .eng-exercise-card {
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.responsive-site .eng-header,
+.responsive-site .eng-exercise-card,
+.responsive-site .blog-thumbnail,
+.responsive-site .form-container,
+.responsive-site .ad-container {
+    border-radius: var(--border-radius-large);
+}
+
+.responsive-site .eng-words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.responsive-site .eng-word {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 0.25rem 0.65rem;
+}
+
+.responsive-site .eng-question {
+    margin-bottom: 0.85rem;
+}
+
+.responsive-site .eng-question-text {
+    display: block;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+}
+
+.responsive-site .eng-blank,
+.responsive-site .eng-dropdown {
+    margin: 0.2rem 0;
+}
+
+.responsive-site .eng-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.responsive-site .eng-btn {
+    flex: 1 1 180px;
+}
+
+/* ===== Mobile-first defaults ===== */
+.units-grid,
+.lessons-grid,
+.interactive-exercises-grid {
+    grid-template-columns: 1fr;
+}
+
+/* === MOBILE (up to 480px) === */
+@media (max-width: 480px) {
+    .site-topbar {
+        padding-inline: 0.75rem;
+    }
+
+    .site-logo-link {
+        max-width: calc(100% - 52px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .site-desktop-nav {
+        display: none;
+    }
+
+    .site-menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    .search-input,
+    .search-btn {
+        border-radius: var(--border-radius);
+    }
+
+    .units-grid,
+    .lessons-grid,
+    .interactive-exercises-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .lessons-actions {
+        justify-content: stretch;
+    }
+
+    .interactive-exercises-btn,
+    .back-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* === LARGE MOBILE / SMALL TABLET (up to 767px) === */
+@media (max-width: 767px) {
+    .site-desktop-nav {
+        display: none;
+    }
+
+    .site-menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .site-mobile-nav {
+        display: none;
+    }
+
+    .site-mobile-nav.is-open {
+        display: flex;
+    }
+
+    .lessons-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* === TABLET (768px to 1024px) === */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .site-menu-toggle {
+        display: none;
+    }
+
+    .site-desktop-nav {
+        display: flex;
+    }
+
+    .site-mobile-nav {
+        display: none !important;
+    }
+
+    .units-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .lessons-grid,
+    .interactive-exercises-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+/* === DESKTOP (1025px and above) === */
+@media (min-width: 1025px) {
+    .site-menu-toggle {
+        display: none;
+    }
+
+    .site-desktop-nav {
+        display: flex;
+    }
+
+    .site-mobile-nav {
+        display: none !important;
+    }
+
+    .units-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .lessons-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     }
 }
