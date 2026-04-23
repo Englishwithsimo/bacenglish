@@ -81,6 +81,15 @@ class VideoPlatform {
                     link: 'unit8-interactive-exercises.html',
                     buttonText: 'فتح التمارين التفاعلية'
                 }
+            ],
+            9: [
+                {
+                    type: 'الوحدة التاسعة',
+                    title: 'Unit Nine Interactive Exercises',
+                    description: 'Science and Technology practice for vocabulary, conditional type three, wishes/regrets, and writing.',
+                    link: 'unit9-interactive-exercises.html',
+                    buttonText: 'فتح التمارين التفاعلية'
+                }
             ]
         };
         
