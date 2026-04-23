@@ -9,7 +9,17 @@ class VideoPlatform {
         this.currentView = 'units';
         this.currentUnit = null;
         this.searchResults = [];
-        this.interactiveExercisesData = {};
+        this.interactiveExercisesData = {
+            1: [
+                {
+                    type: 'الوحدة الأولى',
+                    title: 'Unit One Interactive Exercises',
+                    description: 'Vocabulary, grammar, functions, and writing practice for Unit 1 (Gifts of Youth).',
+                    link: 'unit1-interactive-exercises.html',
+                    buttonText: 'فتح التمارين التفاعلية'
+                }
+            ]
+        };
         
         // Unit icons mapping (Font Awesome)
         this.unitIcons = {
