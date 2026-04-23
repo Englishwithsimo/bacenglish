@@ -72,6 +72,15 @@ class VideoPlatform {
                     link: 'unit7-interactive-exercises.html',
                     buttonText: 'فتح التمارين التفاعلية'
                 }
+            ],
+            8: [
+                {
+                    type: 'الوحدة الثامنة',
+                    title: 'Unit Eight Interactive Exercises',
+                    description: 'International Organizations practice for vocabulary, language functions, linking words, and writing.',
+                    link: 'unit8-interactive-exercises.html',
+                    buttonText: 'فتح التمارين التفاعلية'
+                }
             ]
         };
         
