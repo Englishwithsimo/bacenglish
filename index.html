@@ -267,6 +267,22 @@
             });
         }
 
+        // Enforce same-tab navigation for interactive exercise actions.
+        document.addEventListener('click', (event) => {
+            const interactiveLink = event.target.closest('#interactiveExercisesGrid a.exercise-link');
+            if (!interactiveLink) {
+                return;
+            }
+
+            const href = interactiveLink.getAttribute('href');
+            if (!href) {
+                return;
+            }
+
+            event.preventDefault();
+            window.location.assign(href);
+        });
+
         document.querySelectorAll('table').forEach((table) => {
             if (table.parentElement && table.parentElement.classList.contains('table-responsive')) {
                 return;
