@@ -27,6 +27,15 @@ class VideoPlatform {
                     link: 'unit2-interactive-exercises.html',
                     buttonText: 'فتح التمارين التفاعلية'
                 }
+            ],
+            3: [
+                {
+                    type: 'الوحدة الثالثة',
+                    title: 'Unit Three Interactive Exercises',
+                    description: 'Education and Illiteracy practice for vocabulary, language functions, grammar, and writing.',
+                    link: 'unit3-interactive-exercises.html',
+                    buttonText: 'فتح التمارين التفاعلية'
+                }
             ]
         };
         
