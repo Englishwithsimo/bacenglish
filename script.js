@@ -602,7 +602,7 @@ class VideoPlatform {
             <p class="exercise-description">${description}</p>
             ${
                 exercise.link
-                    ? `<a href="${exercise.link}" target="_blank" rel="noopener noreferrer" class="exercise-link">${buttonText}</a>`
+                    ? `<a href="${exercise.link}" class="exercise-link">${buttonText}</a>`
                     : '<span class="exercise-link disabled">سيتم نشر التمرين قريباً</span>'
             }
         `;
